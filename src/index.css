@@ -16,12 +16,3 @@ html {
 html::-webkit-scrollbar {
 	display: none;
 }
-
-body {
-	background-color: #e0e0e0;
-	color: #000;
-	font-family: "Rubik";
-	font-weight: 400;
-	overflow-x: hidden;
-	margin: 0;
-}

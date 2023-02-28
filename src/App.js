@@ -2,7 +2,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import UpdatePost from "./pages/UpdatePost";
 import NewPost from "./pages/NewPost";
+import NotFound from "./pages/NotFound";
+
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 function App() {
   return (
@@ -11,11 +16,12 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/post/:id" element={<UpdatePost />} />
           <Route path="/newpost" element={<NewPost />} />
-          <Route path="/projects" element={<h1>Projects</h1>} />
-          <Route path="*" element={<h1>404</h1>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
+      <ToastContainer />
     </>
   );
 }
