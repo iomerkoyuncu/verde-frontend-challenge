@@ -8,6 +8,12 @@ const getPosts = async () => {
   return response.data;
 }
 
+//create post
+const createPost = async (post) => {
+  const response = await axios.post(`${API_URL}`, post);
+  return response.data;
+}
+
 //update post
 const updatePost = async (post) => {
   const response = await axios.put(`${API_URL}/${post.id}`, post);
@@ -22,6 +28,7 @@ const deletePost = async (postId) => {
 
 const PostService = {
   getPosts,
+  createPost,
   updatePost,
   deletePost,
 }

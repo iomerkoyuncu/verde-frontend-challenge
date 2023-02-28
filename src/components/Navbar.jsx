@@ -7,9 +7,12 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import WindowIcon from '@mui/icons-material/Window'
 
 import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export default function Navbar() {
   const navigate = useNavigate()
+  const { posts } = useSelector((state) => state.posts)
+
   return (
     <nav className="px-10 py-5 sticky">
       <div className="flex justify-between p-3 shadow-md bg-white">
@@ -20,7 +23,7 @@ export default function Navbar() {
         </div>
         <div className="w-1/2 flex justify-end items-center">
           <div onClick={() => navigate('/')} className="px-3 cursor-pointer">
-            <Badge badgeContent={10} color="info">
+            <Badge badgeContent={posts.length} color="info">
               <h6 className="p-2 font-bold">Posts</h6>
             </Badge>
           </div>

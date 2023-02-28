@@ -1,20 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import { addPost } from '../features/posts/PostSlice'
+import { toast } from 'react-toastify'
 
 import WestIcon from '@mui/icons-material/West'
 
 import { IconButton } from '@mui/material'
 
 function NewPost() {
-  const navigate = useNavigate()
-
   const [formdata, setFormdata] = useState({
     title: '',
-    body: '',
-    userId: 1
+    body: ''
   })
+
+  const { title, body } = formdata
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value })
@@ -22,13 +25,15 @@ function NewPost() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios
-      .post('https://jsonplaceholder.typicode.com/posts', formdata)
-      .then((res) => {
-        console.log(res)
-        navigate('/')
-      })
-      .catch((err) => console.log(err))
+
+    const newPost = {
+      title,
+      body
+    }
+
+    dispatch(addPost(newPost))
+    toast.success('Post created successfully')
+    navigate('/')
   }
 
   return (
@@ -58,7 +63,7 @@ function NewPost() {
                 className="p-5 h-20 border-2 border-gray-300 rounded-md resize-none"
                 type="text"
                 name="title"
-                value={formdata.title}
+                value={title}
                 placeholder="Enter title"
               />
               <label className="py-2">Detail</label>
@@ -67,7 +72,7 @@ function NewPost() {
                 className="p-5 border-2 h-32 border-gray-300 rounded-md resize-none"
                 type="text"
                 name="body"
-                value={formdata.body}
+                value={body}
                 placeholder="Enter detail"
               />
             </div>
