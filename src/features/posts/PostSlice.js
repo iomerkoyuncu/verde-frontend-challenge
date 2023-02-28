@@ -25,9 +25,12 @@ export const postSlice = createSlice({
       state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
     updatePost: (state, action) => {
-      state.posts = state.posts.map((post) =>
-        post.id === action.payload.id ? action.payload : post
-      );
+      const { id, title, body } = action.payload;
+      const existingPost = state.posts.find((post) => post.id === id);
+      if (existingPost) {
+        existingPost.title = title;
+        existingPost.body = body;
+      }
     },
   },
 });
