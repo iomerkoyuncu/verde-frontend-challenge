@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { addPost } from '../features/postSlice'
-
 import { toast } from 'react-toastify'
+import { IconButton } from '@mui/material'
 
 import WestIcon from '@mui/icons-material/West'
-
-import { IconButton } from '@mui/material'
 
 function NewPost() {
   const { posts } = useSelector((state) => state.posts)
