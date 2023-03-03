@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { addPost } from '../features/posts/PostSlice'
+import { addPost } from '../features/postSlice'
+
 import { toast } from 'react-toastify'
 
 import WestIcon from '@mui/icons-material/West'
@@ -9,12 +10,16 @@ import WestIcon from '@mui/icons-material/West'
 import { IconButton } from '@mui/material'
 
 function NewPost() {
+  const { posts } = useSelector((state) => state.posts)
+
   const [formdata, setFormdata] = useState({
+    userId: 1,
+    id: posts.length + 1,
     title: '',
     body: ''
   })
 
-  const { title, body } = formdata
+  const { userId, id, title, body } = formdata
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -27,6 +32,8 @@ function NewPost() {
     e.preventDefault()
 
     const newPost = {
+      userId,
+      id,
       title,
       body
     }

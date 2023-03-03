@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { updatePost, deletePost } from '../features/postSlice'
 
 import WestIcon from '@mui/icons-material/West'
 import AddIcon from '@mui/icons-material/Add'
@@ -10,40 +11,46 @@ import { toast } from 'react-toastify'
 
 import { IconButton } from '@mui/material'
 
-import { updatePost } from '../features/posts/PostSlice'
-
-import axios from 'axios'
-
 function UpdatePost() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const params = useParams()
 
-  const { posts, loading } = useSelector((state) => state.posts)
+  const { posts } = useSelector((state) => state.posts)
+
+  const existingPost = posts.find((post) => post.id === Number(params.id))
+
+  const { userId, id, title, body } = existingPost
 
   const [formdata, setFormdata] = useState({
-    id: params.id - 1,
-    title: posts[params.id - 1].title,
-    body: posts[params.id - 1].body
+    title,
+    body
   })
 
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.name]: e.target.value })
   }
 
-  const { id, title, body } = formdata
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const updatedPost = {
+      userId,
       id,
-      title,
-      body
+      title: formdata.title,
+      body: formdata.body
     }
 
     dispatch(updatePost(updatedPost))
-    toast.success('Post updated successfully')
+    toast.success('Post updated successfully.')
+    navigate('/')
+  }
+
+  const handleDelete = (e) => {
+    e.preventDefault()
+
+    dispatch(deletePost(id))
+    toast.error('Post deleted.')
     navigate('/')
   }
 
@@ -81,7 +88,7 @@ function UpdatePost() {
               <textarea
                 type="text"
                 name="title"
-                value={title}
+                value={formdata.title}
                 className="p-5 h-20 border-2 border-gray-300 rounded-md resize-none"
                 onChange={handleChange}
                 placeholder="Enter title"
@@ -90,7 +97,7 @@ function UpdatePost() {
               <textarea
                 type="text"
                 name="body"
-                value={body}
+                value={formdata.body}
                 onChange={handleChange}
                 className="p-5 border-2 h-32 border-gray-300 rounded-md resize-none"
                 placeholder="Enter detail"
@@ -98,7 +105,10 @@ function UpdatePost() {
             </div>
             <div className=" flex justify-end m-2 ">
               <div className=" p-2 flex justify-between ">
-                <button className="flex justify-between items-center px-2 mx-2 text-white bg-red-400 rounded-md transition ease-in-out delay-150 hover:scale-110 duration-300 cursor-pointer">
+                <button
+                  onClick={handleDelete}
+                  className="flex justify-between items-center px-2 mx-2 text-white bg-red-400 rounded-md transition ease-in-out delay-150 hover:scale-110 duration-300 cursor-pointer"
+                >
                   <DeleteIcon />
                   <h4 className="p-2 ">Delete</h4>
                 </button>
