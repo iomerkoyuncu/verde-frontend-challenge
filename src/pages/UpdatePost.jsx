@@ -89,7 +89,7 @@ function UpdatePost() {
                 type="text"
                 name="title"
                 value={formdata.title}
-                className="p-5 h-20 border-2 border-gray-300 rounded-md resize-none"
+                className="p-5 h-20 border-2 border-gray-300 rounded-md resize-none overflow-hidden"
                 onChange={handleChange}
                 placeholder="Enter title"
               />
@@ -99,7 +99,7 @@ function UpdatePost() {
                 name="body"
                 value={formdata.body}
                 onChange={handleChange}
-                className="p-5 border-2 h-32 border-gray-300 rounded-md resize-none"
+                className="p-5 border-2 h-32 border-gray-300 rounded-md resize-none overflow-hidden"
                 placeholder="Enter detail"
               />
             </div>

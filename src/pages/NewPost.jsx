@@ -65,7 +65,7 @@ function NewPost() {
               <label className="py-2">Title</label>
               <textarea
                 onChange={handleChange}
-                className="p-5 h-20 border-2 border-gray-300 rounded-md resize-none"
+                className="p-5 h-20 border-2 border-gray-300 rounded-md resize-none overflow-hidden"
                 type="text"
                 name="title"
                 value={title}
@@ -74,7 +74,7 @@ function NewPost() {
               <label className="py-2">Detail</label>
               <textarea
                 onChange={handleChange}
-                className="p-5 border-2 h-32 border-gray-300 rounded-md resize-none"
+                className="p-5 border-2 h-32 border-gray-300 rounded-md resize-none overflow-hidden"
                 type="text"
                 name="body"
                 value={body}
