@@ -60,7 +60,7 @@ function NewPost() {
             </IconButton>
             <h1 className="p-3 text-xl">Create New Post</h1>
           </div>
-          <div className="w-3/5 m-5 p-5 mx-10">
+          <div className="w-3/5 max-sm:w-auto max-sm:m-2 max-sm:p-2 m-5 p-5 mx-10">
             <div className="flex flex-col">
               <label className="py-2">Title</label>
               <textarea

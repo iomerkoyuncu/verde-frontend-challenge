@@ -56,7 +56,7 @@ function UpdatePost() {
 
   return (
     <div className="flex justify-center items-center font-bold px-10 py-5">
-      <div className="bg-white min-w-full shadow-md">
+      <div className="bg-white w-full shadow-md">
         <div className="flex flex-col px-10 py-5">
           <div className="flex items-center">
             <IconButton
@@ -73,7 +73,7 @@ function UpdatePost() {
             </IconButton>
             <h1 className="p-3 text-xl">Update Post</h1>
           </div>
-          <div className="w-3/5 m-5 p-5 mx-10">
+          <div className="w-3/5 max-sm:w-auto max-sm:m-2 max-sm:p-2 m-5 p-5 mx-10">
             <div className="flex justify-end m-2">
               <button
                 onClick={() => navigate('/newpost')}
@@ -83,13 +83,13 @@ function UpdatePost() {
                 <h4 className="p-2 ">Add Post</h4>
               </button>
             </div>
-            <div className="flex flex-col">
+            <div className=" flex flex-col">
               <label className="py-2">Title</label>
               <textarea
                 type="text"
                 name="title"
                 value={formdata.title}
-                className="p-5 h-20 border-2 border-gray-300 rounded-md resize-none overflow-hidden"
+                className=" h-20 p-5 border-2 border-gray-300 rounded-md resize-none overflow-hidden"
                 onChange={handleChange}
                 placeholder="Enter title"
               />
